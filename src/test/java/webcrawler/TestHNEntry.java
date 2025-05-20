@@ -42,4 +42,9 @@ public class TestHNEntry {
         assertEquals(hnEntry.getPoints(),54);
     }
 
+    @Test
+    public void testPrint() {
+        mockHNEntry.printEntry();
+        verify(mockHNEntry).printEntry();
+    }
 }
