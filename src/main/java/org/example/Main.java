@@ -11,6 +11,5 @@ public class Main {
         webCrawlerService.showCrawlerInstructions();
         List<HNEntry> allEntries = webCrawlerService.getLast30();
         webCrawlerService.printEntries(allEntries);
-        System.out.println("Hello world!");
     }
 }
