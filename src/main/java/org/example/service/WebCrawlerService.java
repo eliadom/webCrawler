@@ -70,4 +70,10 @@ public class WebCrawlerService {
         cleanElements.forEach(entry -> finalHnEntries.add(new HNEntry(entry)));
         return hnEntries.subList(0, 29);
     }
+
+    public List<HNEntry> moreThanFiveByComments(List<HNEntry> entries) {
+        entries = entries.stream().filter(entry -> entry.wordsOnTitle() > 5).collect(Collectors.toList());
+        entries.sort((a, b) -> b.getNumberOfComments() - a.getNumberOfComments());
+        return entries;
+    }
 }
