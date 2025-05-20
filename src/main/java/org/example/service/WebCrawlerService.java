@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class WebCrawlerService {
 
-    final String FETCH_LINK = "https://news.ycombinator.com/news";
+    static final String FETCH_LINK = "https://news.ycombinator.com/news";
 
     @Generated
     public void showCrawlerInstructions() {
