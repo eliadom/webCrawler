@@ -22,11 +22,9 @@ public class WebCrawlerService {
         Document doc = Jsoup.parse(htmlResponse);
 
         Elements cleanElements = cleanedElements(doc);
-        Elements elementsUnified = new Elements();
-        for (int i = 0; i < cleanElements.size() - 1; i = i + 2) {
-            elementsUnified.add(cleanElements.get(i).append(cleanElements.get(i + 1).html()));
-        }
-        return elementsUnified;
+        cleanElements = unifyElements(cleanElements);
+
+        return cleanElements;
     }
 
     private Elements cleanedElements(Document doc){
@@ -35,5 +33,13 @@ public class WebCrawlerService {
         Element allEntries = titleElements.get(2);
         Elements allEntriesDivided = allEntries.select("table > tbody > tr");
         return allEntriesDivided.stream().filter(entry -> entry.attributes().size() == 0 || entry.className().equals("athing submission")).collect(Collectors.toCollection(Elements::new));
+    }
+
+    private Elements unifyElements(Elements cleanElements) {
+        Elements elementsUnified = new Elements();
+        for (int i = 0; i < cleanElements.size() - 1; i = i + 2) {
+            elementsUnified.add(cleanElements.get(i).append(cleanElements.get(i + 1).html()));
+        }
+        return elementsUnified;
     }
 }
