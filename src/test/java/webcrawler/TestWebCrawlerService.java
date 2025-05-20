@@ -26,4 +26,10 @@ public class TestWebCrawlerService {
         // Throw can only be caused to internal error. Not client cases. Just controlling the error
         assertDoesNotThrow(() -> webCrawlerService.saveAccess());
     }
+
+    @Test
+    public void testWebCrawlerServiceSaveAccessFilterTrue() {
+        assertDoesNotThrow(() -> webCrawlerService.saveAccess(true));
+    }
+
 }
