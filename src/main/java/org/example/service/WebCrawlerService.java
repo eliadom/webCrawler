@@ -15,16 +15,19 @@ import java.util.stream.Collectors;
 public class WebCrawlerService {
 
     public Elements getLast30() {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "https://news.ycombinator.com/news";
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
-        String htmlResponse = response.getBody();
-        Document doc = Jsoup.parse(htmlResponse);
-
+        Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
         cleanElements = unifyElements(cleanElements);
 
         return cleanElements;
+    }
+
+    private Document getResponseHTML() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://news.ycombinator.com/news";
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+        String htmlResponse = response.getBody();
+        return Jsoup.parse(htmlResponse);
     }
 
     private Elements cleanedElements(Document doc){
