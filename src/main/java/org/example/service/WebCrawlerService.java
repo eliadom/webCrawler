@@ -9,7 +9,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +32,13 @@ public class WebCrawlerService {
         System.out.println("* e : Exit");
     }
 
-    public void printEntries(List<HNEntry> hnEntries){
+    public void saveAccess() throws IOException {
+        Writer writer = new BufferedWriter(new FileWriter("C:/Github/webCrawler/accessLog.txt", true));
+        writer.append(new Date() + " --- " + "FETCH\n");
+        writer.close();
+    }
+
+    public void printEntries(List<HNEntry> hnEntries) {
         for (HNEntry hnEntry : hnEntries) {
             hnEntry.printEntry();
         }
@@ -64,7 +75,7 @@ public class WebCrawlerService {
         return elementsUnified;
     }
 
-    private List<HNEntry> hnEntriesFromElements (Elements cleanElements) {
+    private List<HNEntry> hnEntriesFromElements(Elements cleanElements) {
         List<HNEntry> hnEntries = new ArrayList<>();
         List<HNEntry> finalHnEntries = hnEntries;
         cleanElements.forEach(entry -> finalHnEntries.add(new HNEntry(entry)));
