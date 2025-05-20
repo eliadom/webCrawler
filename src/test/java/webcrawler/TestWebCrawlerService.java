@@ -1,6 +1,5 @@
 package webcrawler;
 
-import org.example.entity.HNEntry;
 import org.example.service.WebCrawlerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
