@@ -21,12 +21,14 @@ public class WebCrawlerService {
         String htmlResponse = response.getBody();
         Document doc = Jsoup.parse(htmlResponse);
 
+        return cleanedElements(doc);
+    }
+
+    private Elements cleanedElements(Document doc){
         Element titles = doc.getElementById("hnmain");
         Elements titleElements = titles.getElementsByAttributeValue("border", "0");
         Element allEntries = titleElements.get(2);
         Elements allEntriesDivided = allEntries.select("table > tbody > tr");
-        allEntriesDivided = allEntriesDivided.stream().filter(entry -> entry.attributes().size() == 0 || entry.className().equals("athing submission")).collect(Collectors.toCollection(Elements::new));
-        // Divided into number,title; points and number of comments.
-        return allEntriesDivided;
+        return allEntriesDivided.stream().filter(entry -> entry.attributes().size() == 0 || entry.className().equals("athing submission")).collect(Collectors.toCollection(Elements::new));
     }
 }
