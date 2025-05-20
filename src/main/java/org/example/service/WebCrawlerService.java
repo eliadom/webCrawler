@@ -76,4 +76,10 @@ public class WebCrawlerService {
         entries.sort((a, b) -> b.getNumberOfComments() - a.getNumberOfComments());
         return entries;
     }
+
+    public List<HNEntry> lessOrEqualThanFiveByPoints(List<HNEntry> entries) {
+        entries = entries.stream().filter(entry -> entry.wordsOnTitle() <= 5).collect(Collectors.toList());
+        entries.sort((a, b) -> b.getPoints() - a.getPoints());
+        return entries;
+    }
 }
