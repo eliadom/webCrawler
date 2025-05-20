@@ -53,4 +53,9 @@ public class HNEntry {
         separatedTitle = separatedTitle.stream().filter(s -> s.matches("[a-zA-Z]+")).collect(Collectors.toList());
         return separatedTitle.size();
     }
+
+    public int getNumberOfComments() {
+        return numberOfComments;
+    }
+
 }
