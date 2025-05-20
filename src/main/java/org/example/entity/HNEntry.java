@@ -1,4 +1,4 @@
-package org.example.entities;
+package org.example.entity;
 
 import java.util.List;
 import java.util.stream.Collectors;
