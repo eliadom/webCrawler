@@ -33,15 +33,16 @@ public class WebCrawlerService {
     }
 
     public void saveAccess() throws IOException {
-        Writer writer = new BufferedWriter(new FileWriter("C:/Github/webCrawler/accessLog.txt", true));
-        writer.append(new Date() + " --- " + "FETCH\n");
-        writer.close();
+        saveLog("FETCH");
     }
 
     public void saveAccess(boolean filterMore) throws IOException {
+        saveLog(filterMore ? "FILTER MORE THAN 5" : "FILTER LESSEQ 5");
+    }
+
+    private void saveLog(String action) throws IOException {
         Writer writer = new BufferedWriter(new FileWriter("C:/Github/webCrawler/accessLog.txt", true));
-        String action = filterMore ? "FILTER MORE THAN 5" : "FILTER LESSEQ 5";
-        writer.append(new Date() + " --- " + action +"\n");
+        writer.append(new Date() + " --- " + action  +"\n");
         writer.close();
     }
 
