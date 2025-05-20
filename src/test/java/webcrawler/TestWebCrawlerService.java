@@ -28,6 +28,7 @@ public class TestWebCrawlerService {
     HNEntry entryOrderOne;
     HNEntry entryOrderTwo;
     HNEntry entryOrderThree;
+    HNEntry entryOrderFour;
 
     @BeforeEach
     public void setUp() {
@@ -39,6 +40,7 @@ public class TestWebCrawlerService {
         entryOrderOne = new HNEntry(1,"This is such a long title it will come out of my screen", 35, 34);
         entryOrderTwo = new HNEntry(2,"Short", 32, 0);
         entryOrderThree = new HNEntry(2,"This is not such a short title", 3, 140);
+        entryOrderFour = new HNEntry(4,"Very short", 77, 10);
     }
 
     @Test
@@ -73,6 +75,15 @@ public class TestWebCrawlerService {
         assertEquals(2, entries.size());
         assertEquals(entryOrderThree, entries.get(0));
         assertEquals(entryOrderOne, entries.get(1));
+    }
+
+    @Test
+    public void testLessThanFiveByPoints() {
+        List<HNEntry> entries = Arrays.asList(entryOrderOne, entryOrderTwo, entryOrderThree, entryOrderFour);
+        entries = webCrawlerService.lessOrEqualThanFiveByPoints(entries);
+        assertEquals(2, entries.size());
+        assertEquals(entryOrderFour, entries.get(0));
+        assertEquals(entryOrderTwo, entries.get(1));
     }
 
 }
