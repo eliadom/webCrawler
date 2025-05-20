@@ -23,6 +23,8 @@ public class WebCrawlerService {
 
     static final String FETCH_LINK = "https://news.ycombinator.com/news";
 
+    // Pre:
+    // Post:
     @Generated
     public void showCrawlerInstructions() {
         System.out.println("----------------------------------------------------------------------------------------------------");
@@ -34,26 +36,39 @@ public class WebCrawlerService {
         System.out.println("* e : Exit");
     }
 
+    // Pre:
+    // Post:
+    // Action: Saves log in case it can. Throws IOException otherwise
     public void saveAccess() throws IOException {
         saveLog("FETCH");
     }
 
+    // Pre:
+    // Post:
+    // Action: Saves log in case it can. Throws IOException otherwise
     public void saveAccess(boolean filterMore) throws IOException {
         saveLog(filterMore ? "FILTER MORE THAN 5" : "FILTER LESSEQ 5");
     }
 
+    // Pre:
+    // Post:
+    // Action: Saves log in case it can. Throws IOException otherwise
     private void saveLog(String action) throws IOException {
         Writer writer = new BufferedWriter(new FileWriter("C:/Github/webCrawler/accessLog.txt", true));
         writer.append(new Date() + " --- " + action  +"\n");
         writer.close();
     }
 
+    // Pre:
+    // Post:
     public void printEntries(List<HNEntry> hnEntries) {
         for (HNEntry hnEntry : hnEntries) {
             hnEntry.printEntry();
         }
     }
 
+    // Pre:
+    // Post: Returns most recent entries on the website
     public List<HNEntry> getLast30() {
         Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
@@ -62,6 +77,8 @@ public class WebCrawlerService {
         return hnEntriesFromElements(cleanElements);
     }
 
+    // Pre: None. We are assuming website will not be down.
+    // Post: Jsoup Document ready to be manipulated
     private Document getResponseHTML() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(FETCH_LINK, HttpMethod.GET, null, String.class);
@@ -69,6 +86,8 @@ public class WebCrawlerService {
         return Jsoup.parse(htmlResponse);
     }
 
+    // Pre: Document passed through arguments is not null
+    // Post: Jsoup minimal Elements adapted to our news format.
     private Elements cleanedElements(Document doc) {
         Element titles = doc.getElementById("hnmain");
         Elements titleElements = titles.getElementsByAttributeValue("border", "0");
@@ -77,6 +96,8 @@ public class WebCrawlerService {
         return allEntriesDivided.stream().filter(entry -> entry.attributes().size() == 0 || entry.className().equals("athing submission")).collect(Collectors.toCollection(Elements::new));
     }
 
+    // Pre: Elements is not null and have our desired format (they must have been cleaned as news combinator HTML format)
+    // Post: Elements, now unifying basic data and subtext data
     private Elements unifyElements(Elements cleanElements) {
         Elements elementsUnified = new Elements();
         for (int i = 0; i < cleanElements.size() - 1; i = i + 2) {
@@ -85,6 +106,8 @@ public class WebCrawlerService {
         return elementsUnified;
     }
 
+    // Pre: Elements have been cleaned and one element contains an entire entry, having basic data and subtext data.
+    // Post: The 30 first elements themselves, formatted as custom HNEntry
     private List<HNEntry> hnEntriesFromElements(Elements cleanElements) {
         List<HNEntry> hnEntries = new ArrayList<>();
         List<HNEntry> finalHnEntries = hnEntries;
@@ -92,12 +115,16 @@ public class WebCrawlerService {
         return hnEntries.subList(0, 30);
     }
 
+    // Pre:
+    // Post: Entries filtered only showing those that contain more than five words in its title, sorted by amount of comments (DESC)
     public List<HNEntry> moreThanFiveByComments(List<HNEntry> entries) {
         entries = entries.stream().filter(entry -> entry.wordsOnTitle() > 5).collect(Collectors.toList());
         entries.sort((a, b) -> b.getNumberOfComments() - a.getNumberOfComments());
         return entries;
     }
 
+    // Pre:
+    // Post: Entries filtered only showing those that contain five or less words in its title, sorted by amount of points (DESC)
     public List<HNEntry> lessOrEqualThanFiveByPoints(List<HNEntry> entries) {
         entries = entries.stream().filter(entry -> entry.wordsOnTitle() <= 5).collect(Collectors.toList());
         entries.sort((a, b) -> b.getPoints() - a.getPoints());
