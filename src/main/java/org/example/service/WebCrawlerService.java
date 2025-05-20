@@ -38,6 +38,13 @@ public class WebCrawlerService {
         writer.close();
     }
 
+    public void saveAccess(boolean filterMore) throws IOException {
+        Writer writer = new BufferedWriter(new FileWriter("C:/Github/webCrawler/accessLog.txt", true));
+        String action = filterMore ? "FILTER MORE THAN 5" : "FILTER LESSEQ 5";
+        writer.append(new Date() + " --- " + action +"\n");
+        writer.close();
+    }
+
     public void printEntries(List<HNEntry> hnEntries) {
         for (HNEntry hnEntry : hnEntries) {
             hnEntry.printEntry();
