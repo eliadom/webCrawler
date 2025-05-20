@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class WebCrawlerService {
 
+    final String FETCH_LINK = "https://news.ycombinator.com/news";
+
     public Elements getLast30() {
         Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
@@ -24,8 +26,7 @@ public class WebCrawlerService {
 
     private Document getResponseHTML() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://news.ycombinator.com/news";
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(FETCH_LINK, HttpMethod.GET, null, String.class);
         String htmlResponse = response.getBody();
         return Jsoup.parse(htmlResponse);
     }
