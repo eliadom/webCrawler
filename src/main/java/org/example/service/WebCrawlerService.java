@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.entity.HNEntry;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,18 +9,24 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class WebCrawlerService {
 
     final String FETCH_LINK = "https://news.ycombinator.com/news";
 
-    public Elements getLast30() {
+    public List<HNEntry> getLast30() {
         Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
         cleanElements = unifyElements(cleanElements);
+        List<HNEntry> hnEntries = new ArrayList<>();
+        List<HNEntry> finalHnEntries = hnEntries;
+        cleanElements.forEach(entry -> finalHnEntries.add(new HNEntry(entry)));
+        hnEntries = hnEntries.subList(0, 29);
 
-        return cleanElements;
+        return hnEntries;
     }
 
     private Document getResponseHTML() {
