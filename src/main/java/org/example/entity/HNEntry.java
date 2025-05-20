@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import lombok.Generated;
 import org.jsoup.nodes.Element;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class HNEntry {
         this.numberOfComments = amntOfComments;
     }
 
+    @Generated
     public void printEntry(){
         System.out.println(postNumber + " -- " + title + " -- " + points + " -- " + numberOfComments);
     }
