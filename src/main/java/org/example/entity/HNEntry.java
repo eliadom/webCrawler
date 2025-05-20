@@ -47,4 +47,10 @@ public class HNEntry {
     public void printEntry(){
         System.out.println(postNumber + " -- " + title + " -- " + points + " -- " + numberOfComments);
     }
+
+    public int wordsOnTitle() {
+        List<String> separatedTitle = List.of(title.split("\\s"));
+        separatedTitle = separatedTitle.stream().filter(s -> s.matches("[a-zA-Z]+")).collect(Collectors.toList());
+        return separatedTitle.size();
+    }
 }
