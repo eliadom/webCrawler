@@ -89,7 +89,7 @@ public class WebCrawlerService {
         List<HNEntry> hnEntries = new ArrayList<>();
         List<HNEntry> finalHnEntries = hnEntries;
         cleanElements.forEach(entry -> finalHnEntries.add(new HNEntry(entry)));
-        return hnEntries.subList(0, 29);
+        return hnEntries.subList(0, 30);
     }
 
     public List<HNEntry> moreThanFiveByComments(List<HNEntry> entries) {
