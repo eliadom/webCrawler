@@ -25,6 +25,10 @@ public class TestWebCrawlerService {
     @Mock
     HNEntry entryTwo;
 
+    HNEntry entryOrderOne;
+    HNEntry entryOrderTwo;
+    HNEntry entryOrderThree;
+
     @BeforeEach
     public void setUp() {
         webCrawlerService = new WebCrawlerService();
@@ -32,6 +36,9 @@ public class TestWebCrawlerService {
         entryOne = Mockito.mock(HNEntry.class);
         entryTwo = Mockito.mock(HNEntry.class);
 
+        entryOrderOne = new HNEntry(1,"This is such a long title it will come out of my screen", 35, 34);
+        entryOrderTwo = new HNEntry(2,"Short", 32, 0);
+        entryOrderThree = new HNEntry(2,"This is not such a short title", 3, 140);
     }
 
     @Test
@@ -57,6 +64,15 @@ public class TestWebCrawlerService {
     public void testWebGetLast30() {
         List<HNEntry> last30 = webCrawlerService.getLast30();
         assertEquals(30, last30.size());
+    }
+
+    @Test
+    public void testMoreThanFiveByComments() {
+        List<HNEntry> entries = Arrays.asList(entryOrderOne, entryOrderTwo, entryOrderThree);
+        entries = webCrawlerService.moreThanFiveByComments(entries);
+        assertEquals(2, entries.size());
+        assertEquals(entryOrderThree, entries.get(0));
+        assertEquals(entryOrderOne, entries.get(1));
     }
 
 }
