@@ -58,4 +58,8 @@ public class HNEntry {
         return numberOfComments;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
 }
