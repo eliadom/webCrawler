@@ -1,5 +1,6 @@
 package org.example;
 
+import lombok.Generated;
 import org.example.entity.HNEntry;
 import org.example.service.WebCrawlerService;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+@Generated
 public class Main {
     public static void main(String[] args) {
         WebCrawlerService webCrawlerService = new WebCrawlerService();
