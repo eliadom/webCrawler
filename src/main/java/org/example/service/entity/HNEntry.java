@@ -25,4 +25,8 @@ public class HNEntry {
         this.points = points;
         this.numberOfComments = numberOfComments;
     }
+
+    public void printEntry(){
+        System.out.println(postNumber + " -- " + title + " -- " + points + " -- " + numberOfComments);
+    }
 }
