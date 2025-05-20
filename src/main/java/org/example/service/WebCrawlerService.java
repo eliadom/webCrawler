@@ -8,8 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class WebCrawlerService {
@@ -31,7 +29,7 @@ public class WebCrawlerService {
         return Jsoup.parse(htmlResponse);
     }
 
-    private Elements cleanedElements(Document doc){
+    private Elements cleanedElements(Document doc) {
         Element titles = doc.getElementById("hnmain");
         Elements titleElements = titles.getElementsByAttributeValue("border", "0");
         Element allEntries = titleElements.get(2);
