@@ -15,6 +15,8 @@ public class HNEntry {
 
     int numberOfComments;
 
+    // Pre:
+    // Post:
     public HNEntry() {
         postNumber = 0;
         title = "";
@@ -22,6 +24,8 @@ public class HNEntry {
         numberOfComments = 0;
     }
 
+    // Pre:
+    // Post:
     public HNEntry(int postNumber, String title, int points, int numberOfComments) {
         this.postNumber = postNumber;
         this.title = title;
@@ -29,6 +33,8 @@ public class HNEntry {
         this.numberOfComments = numberOfComments;
     }
 
+    // Pre: Element is a valid element and it was cleaned accordingly to follow the desired format
+    // Post:
     public HNEntry(Element element) {
         String rankString = element.getElementsByClass("rank").text();
         String possiblePoints = element.getElementsByClass("score").text().split(" ")[0];
@@ -45,21 +51,29 @@ public class HNEntry {
         this.numberOfComments = amntOfComments;
     }
 
+    // Pre:
+    // Post:
     @Generated
     public void printEntry(){
         System.out.println(postNumber + " -- " + title + " -- " + points + " -- " + numberOfComments);
     }
 
+    // Pre:
+    // Post: Amount of words on our title, only including those separate words that have at least one letter.
     public int wordsOnTitle() {
         List<String> separatedTitle = List.of(title.split("\\s"));
         separatedTitle = separatedTitle.stream().filter(s -> s.matches("[a-zA-Z]+")).collect(Collectors.toList());
         return separatedTitle.size();
     }
 
+    // Pre:
+    // Post: Amount of comments
     public int getNumberOfComments() {
         return numberOfComments;
     }
 
+    // Pre:
+    // Post: Amount of points
     public int getPoints() {
         return points;
     }
