@@ -21,7 +21,12 @@ public class WebCrawlerService {
         String htmlResponse = response.getBody();
         Document doc = Jsoup.parse(htmlResponse);
 
-        return cleanedElements(doc);
+        Elements cleanElements = cleanedElements(doc);
+        Elements elementsUnified = new Elements();
+        for (int i = 0; i < cleanElements.size() - 1; i = i + 2) {
+            elementsUnified.add(cleanElements.get(i).append(cleanElements.get(i + 1).html()));
+        }
+        return elementsUnified;
     }
 
     private Elements cleanedElements(Document doc){
