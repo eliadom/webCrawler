@@ -27,4 +27,8 @@ public class TestHNEntry {
         assertEquals(hnEntry.getNumberOfComments(),893);
     }
 
+    @Test
+    public void testGetPoints() {
+        assertEquals(hnEntry.getPoints(),123);
+    }
 }
