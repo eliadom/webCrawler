@@ -17,6 +17,16 @@ public class WebCrawlerService {
 
     final String FETCH_LINK = "https://news.ycombinator.com/news";
 
+    public void showCrawlerInstructions() {
+        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------- INSTRUCTIONS -------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.println("* f : fetch 30 newest entries");
+        System.out.println("* m : Show entries with more than five words in the title, ordered by the number of comments first");
+        System.out.println("* l : Show entries with less than or equal to five words in the title, ordered by points");
+        System.out.println("");
+    }
+
     public List<HNEntry> getLast30() {
         Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
