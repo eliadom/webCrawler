@@ -1,5 +1,6 @@
 package org.example.service;
 
+import lombok.Generated;
 import org.example.entity.HNEntry;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,6 +23,7 @@ public class WebCrawlerService {
 
     final String FETCH_LINK = "https://news.ycombinator.com/news";
 
+    @Generated
     public void showCrawlerInstructions() {
         System.out.println("----------------------------------------------------------------------------------------------------");
         System.out.println("------------------------------------------- INSTRUCTIONS -------------------------------------------");
