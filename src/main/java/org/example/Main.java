@@ -36,6 +36,8 @@ public class Main {
                         break;
                     case "e":
                         break;
+                    default:
+                        break;
                 }
             } catch (IOException e) {
                 System.out.println("We could not register this action into the access log.");
