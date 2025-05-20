@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -20,4 +21,10 @@ public class TestHNEntry {
     public void testWordsOnTitle() {
         assertTrue(hnEntry.wordsOnTitle() == 4);
     }
+
+    @Test
+    public void testGetNumberOfComments() {
+        assertEquals(hnEntry.getNumberOfComments(),893);
+    }
+
 }
