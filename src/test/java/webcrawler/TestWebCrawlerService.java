@@ -53,4 +53,10 @@ public class TestWebCrawlerService {
         verify(entryTwo, only()).printEntry();
     }
 
+    @Test
+    public void testWebGetLast30() {
+        List<HNEntry> last30 = webCrawlerService.getLast30();
+        assertEquals(30, last30.size());
+    }
+
 }
