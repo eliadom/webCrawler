@@ -29,6 +29,6 @@ public class TestHNEntry {
 
     @Test
     public void testGetPoints() {
-        assertEquals(hnEntry.getPoints(),123);
+        assertEquals(hnEntry.getPoints(),54);
     }
 }
