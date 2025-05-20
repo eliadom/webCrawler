@@ -27,6 +27,12 @@ public class WebCrawlerService {
         System.out.println("");
     }
 
+    public void printEntries(List<HNEntry> hnEntries){
+        for (HNEntry hnEntry : hnEntries) {
+            hnEntry.printEntry();
+        }
+    }
+
     public List<HNEntry> getLast30() {
         Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
