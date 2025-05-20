@@ -21,12 +21,8 @@ public class WebCrawlerService {
         Document doc = getResponseHTML();
         Elements cleanElements = cleanedElements(doc);
         cleanElements = unifyElements(cleanElements);
-        List<HNEntry> hnEntries = new ArrayList<>();
-        List<HNEntry> finalHnEntries = hnEntries;
-        cleanElements.forEach(entry -> finalHnEntries.add(new HNEntry(entry)));
-        hnEntries = hnEntries.subList(0, 29);
 
-        return hnEntries;
+        return hnEntriesFromElements(cleanElements);
     }
 
     private Document getResponseHTML() {
@@ -50,5 +46,12 @@ public class WebCrawlerService {
             elementsUnified.add(cleanElements.get(i).append(cleanElements.get(i + 1).html()));
         }
         return elementsUnified;
+    }
+
+    private List<HNEntry> hnEntriesFromElements (Elements cleanElements) {
+        List<HNEntry> hnEntries = new ArrayList<>();
+        List<HNEntry> finalHnEntries = hnEntries;
+        cleanElements.forEach(entry -> finalHnEntries.add(new HNEntry(entry)));
+        return hnEntries.subList(0, 29);
     }
 }
