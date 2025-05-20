@@ -1,5 +1,6 @@
 package webcrawler;
 
+import org.example.entity.HNEntry;
 import org.example.service.WebCrawlerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,18 +8,30 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class TestWebCrawlerService {
 
-    @Mock
+
     WebCrawlerService webCrawlerService;
+
+    @Mock
+    HNEntry entryOne;
+
+    @Mock
+    HNEntry entryTwo;
 
     @BeforeEach
     public void setUp() {
+        webCrawlerService = new WebCrawlerService();
         MockitoAnnotations.openMocks(this);
-        webCrawlerService = Mockito.mock(WebCrawlerService.class);
+        entryOne = Mockito.mock(HNEntry.class);
+        entryTwo = Mockito.mock(HNEntry.class);
+
     }
 
     @Test
@@ -30,6 +43,14 @@ public class TestWebCrawlerService {
     @Test
     public void testWebCrawlerServiceSaveAccessFilterTrue() {
         assertDoesNotThrow(() -> webCrawlerService.saveAccess(true));
+    }
+
+    @Test
+    public void testWebCrawlerServicePrintEntries() {
+        List<HNEntry> entries = Arrays.asList(entryOne, entryTwo);
+        webCrawlerService.printEntries(entries);
+        verify(entryOne, only()).printEntry();
+        verify(entryTwo, only()).printEntry();
     }
 
 }
